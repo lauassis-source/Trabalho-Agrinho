@@ -1,1 +1,43 @@
 
+document.getElementById('btnCalcular').addEventListener('click', function() {
+    // Captura os valores selecionados nos formulários
+    const transporte = parseInt(document.getElementById('transporte').value);
+    const plastico = parseInt(document.getElementById('plastico').value);
+    const desperdicio = parseInt(document.getElementById('desperdicio').value);
+
+    // Soma a pontuação (Quanto maior o valor, maior o impacto negativo)
+    const pontuacaoTotal = transporte + plastico + desperdicio;
+
+    // Seleciona os elementos de exibição do resultado
+    const resultadoCard = document.getElementById('resultadoCard');
+    const scoreTexto = document.getElementById('scoreTexto');
+    const mensagemFeedback = document.getElementById('mensagemFeedback');
+    const dicaTexto = document.getElementById('dicaTexto');
+
+    scoreTexto.textContent = pontuacaoTotal;
+
+    // Lógica de Feedback baseado na pontuação
+    if (pontuacaoTotal <= 3) {
+        mensagemFeedback.textContent = "Excelente! Você tem hábitos muito sustentáveis e está alinhado com o espírito do Agrinho de proteção ao nosso ecossistema! 🌱";
+        dicaTexto.textContent = "Continue sendo um exemplo! Que tal incentivar seus amigos e familiares a criarem uma horta comunitária ou começarem a compostar resíduos orgânicos?";
+    } else if (pontuacaoTotal <= 6) {
+        mensagemFeedback.textContent = "Bom trabalho, mas você pode melhorar! Você já tem consciência ecológica, mas pequenos ajustes na rotina reduzem ainda mais o seu impacto. 🚜";
+        dicaTexto.textContent = "Tente diminuir o uso de sacolas plásticas de supermercado. Substitua-as por ecobags de tecido. O solo e os rios agradecem essa mudança!";
+    } else {
+        mensagemFeedback.textContent = "Alerta Vermelho! Seu estilo de vida atual está gerando uma pegada ecológica alta. É hora de agir pelo nosso planeta! 🚨";
+        dicaTexto.textContent = "Evite o desperdício de comida planejando melhor suas refeições semanais. Lembre-se do que o Agrinho ensina: valorizar o alimento é valorizar o trabalho do produtor rural e economizar recursos hídricos!";
+    }
+
+    // Exibe o card de resultados na tela
+    resultadoCard.classList.remove('escondido');
+    
+    // Rola a tela suavemente para o resultado
+    resultadoCard.scrollIntoView({ behavior: 'smooth' });
+});
+
+// Evento para reiniciar o teste
+document.getElementById('btnRefazer').addEventListener('click', function() {
+    document.getElementById('agrinhoForm').reset();
+    document.getElementById('resultadoCard').add('escondido');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
